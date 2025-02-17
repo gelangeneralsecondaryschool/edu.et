@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Announcement System</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f3e5f5, #e0f2f7);
+      color: #333;
+    }
+
+    header {
+      background: #673ab7;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Announcement Styles */
+    #announcements {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .announcement {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .announcement img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .timestamp {
+      color: #777;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Form Styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: bold;
+      color: #673ab7;
+    }
+
+    input, textarea {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      background: #009688;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #00796b;
+    }
+
+    /* Toggle Button Styles */
+    #toggleView {
+      margin: 1rem;
+      padding: 0.5rem 1rem;
+      background: #ffc107;
+      color: #333;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    #toggleView:hover {
+      background: #ffb300;
+    }
+
+    /* Notification Styles */
+    .notification {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background: #4caf50;
+      color: #fff;
+      padding: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    /* Search Bar Styles */
+    #searchBar {
+      margin: 1rem auto;
+      padding: 0.5rem;
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        padding: 1rem;
+      }
+
+      .announcement {
+        padding: 1rem;
+      }
+
+      form {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>School Announcement System</h1>
+    <button id="toggleView">Switch to Admin View</button>
+    <button><a style="text-decoration: none;" href="../index.html">Back to home</a></button>
+  </header>
+
+  <main>
+    <!-- Announcement Page -->
+    <div id="announcementPage">
+      <h2>Announcements</h2>
+      <!-- Search Bar -->
+      <input type="text" id="searchBar" placeholder="Search announcements by title...">
+      <div id="announcements">
+        <!-- Announcements will be dynamically loaded here -->
+      </div>
+    </div>
+
+    <!-- Admin Page -->
+    <div id="adminPage" style="display: none;">
+      <h2>Admin Panel</h2>
+      <!-- Login Form -->
+      <div id="loginForm">
+        <h3>Login</h3>
+        <form id="login">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <!-- Announcement Form (Hidden by Default) -->
+      <div id="announcementForm" style="display: none;">
+        <h3>Add Announcement</h3>
+        <form id="addAnnouncement">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" required>
+          <label for="photo">Photo URL:</label>
+          <input type="url" id="photo" name="photo" required>
+          <label for="width">Width (px):</label>
+          <input type="number" id="width" name="width" placeholder="Optional">
+          <label for="height">Height (px):</label>
+          <input type="number" id="height" name="height" placeholder="Optional">
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required>
+          <label for="content">Content:</label>
+          <textarea id="content" name="content" required></textarea>
+          <button type="submit">Add Announcement</button>
+        </form>
+      </div>
+
+      <!-- Delete Announcement Form -->
+      <div id="deleteForm" style="display: none;">
+        <h3>Delete Announcement</h3>
+        <form id="deleteAnnouncement">
+          <label for="deleteId">Announcement ID:</label>
+          <input type="text" id="deleteId" name="deleteId" required>
+          <button type="submit">Delete</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Notification -->
+  <div id="notification" class="notification" style="display: none;">New Announcement Added!</div>
+
+  <script>
+    // Simulated Data (Stored in localStorage)
+    let announcements = JSON.parse(localStorage.getItem('announcements')) || [];
+
+    // Password Protection (No Hashing)
+    const username = "abelggss";
+    const password = "@Abel0954";
+
+    // Login Functionality
+    const loginForm = document.getElementById('login');
+    if (loginForm) {
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const inputUsername = document.getElementById('username').value;
+        const inputPassword = document.getElementById('password').value;
+
+        if (inputUsername === username && inputPassword === password) {
+          // Hide login form and show admin forms
+          document.getElementById('loginForm').style.display = 'none';
+          document.getElementById('announcementForm').style.display = 'block';
+          document.getElementById('deleteForm').style.display = 'block';
+        } else {
+          alert('Invalid username or password.');
+        }
+      });
+    }
+
+    // Add New Announcement
+    const addAnnouncementForm = document.getElementById('addAnnouncement');
+    if (addAnnouncementForm) {
+      addAnnouncementForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = document.getElementById('title').value;
+        const photo = document.getElementById('photo').value;
+        const width = document.getElementById('width').value;
+        const height = document.getElementById('height').value;
+        const date = document.getElementById('date').value;
+        const content = document.getElementById('content').value;
+        const timestamp = new Date(); // Current time
+
+        // Generate a unique ID for the announcement
+        const id = Date.now();
+
+        announcements.unshift({ id, title, photo, width, height, date, content, timestamp });
+        localStorage.setItem('announcements', JSON.stringify(announcements));
+        displayAnnouncements();
+        addAnnouncementForm.reset();
+        showNotification('New Announcement Added!');
+      });
+    }
+
+    // Delete Announcement
+    const deleteAnnouncementForm = document.getElementById('deleteAnnouncement');
+    if (deleteAnnouncementForm) {
+      deleteAnnouncementForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const deleteId = parseInt(document.getElementById('deleteId').value);
+        announcements = announcements.filter(ann => ann.id !== deleteId);
+        localStorage.setItem('announcements', JSON.stringify(announcements));
+        displayAnnouncements();
+        showNotification('Announcement Deleted!');
+      });
+    }
+
+    // Search Announcements
+    const searchBar = document.getElementById('searchBar');
+    if (searchBar) {
+      searchBar.addEventListener('input', () => {
+        const searchTerm = searchBar.value.toLowerCase();
+        const filteredAnnouncements = announcements.filter(ann =>
+          ann.title.toLowerCase().includes(searchTerm)
+        );
+        displayAnnouncements(filteredAnnouncements);
+      });
+    }
+
+    // Display Announcements
+    function displayAnnouncements(announcementsToDisplay = announcements) {
+      const container = document.getElementById('announcements');
+      if (container) {
+        container.innerHTML = announcementsToDisplay.map(ann => `
+          <div class="announcement">
+            <h3>${ann.title}</h3>
+            ${ann.photo ? `<img src="${ann.photo}" alt="${ann.title}" style="width: ${ann.width || 'auto'}; height: ${ann.height || 'auto'}; border-radius: 10px;">` : ''}
+            <p>${ann.content}</p>
+            <div class="timestamp">${timeAgo(ann.timestamp)}</div>
+            <div class="timestamp">ID: ${ann.id}</div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Dynamic Timestamp
+    function timeAgo(timestamp) {
+      const now = new Date();
+      const seconds = Math.floor((now - new Date(timestamp)) / 1000);
+
+      if (seconds < 60) return `${seconds} second${seconds === 1 ? '' : 's'} ago`;
+      const minutes = Math.floor(seconds / 60);
+      if (minutes < 60) return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+      const hours = Math.floor(minutes / 60);
+      if (hours < 24) return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+      const days = Math.floor(hours / 24);
+      if (days < 30) return `${days} day${days === 1 ? '' : 's'} ago`;
+      const months = Math.floor(days / 30);
+      return `${months} month${months === 1 ? '' : 's'} ago`;
+    }
+
+    // Show Notification
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.style.display = 'block';
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 3000);
+    }
+
+    // Toggle Between Announcement and Admin Views
+    const toggleViewButton = document.getElementById('toggleView');
+    const announcementPage = document.getElementById('announcementPage');
+    const adminPage = document.getElementById('adminPage');
+
+    toggleViewButton.addEventListener('click', () => {
+      if (announcementPage.style.display === 'none') {
+        announcementPage.style.display = 'block';
+        adminPage.style.display = 'none';
+        toggleViewButton.textContent = 'Switch to Admin View';
+      } else {
+        announcementPage.style.display = 'none';
+        adminPage.style.display = 'block';
+        toggleViewButton.textContent = 'Switch to Announcement View';
+      }
+    });
+
+    // Fast Reload (Every 10 Seconds)
+    setInterval(() => {
+      displayAnnouncements();
+    }, 10000);
+
+    // Initialize
+    displayAnnouncements();
+  </script>
+</body>
+</html>
