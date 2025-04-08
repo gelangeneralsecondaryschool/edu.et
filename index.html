@@ -77,38 +77,8 @@ Fixed Navigation
                 <img loading="lazy" class="logo-default" src="./img/images/tmehert mesetare.png" width="200px" alt="logo" />
                 <h1 data-en="Gelan" data-am="ገላን" data-om="Gelan">Gelan</h1>
             </a>
-			<li class="nav-item dropdown language-switcher">
-				<a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="languageDropdown" 
-				   role="button" data-bs-toggle="dropdown" aria-expanded="false">
-				  <span class="language-flag fi fi-gb me-2"></span>
-				  <span class="language-label" data-en="English" data-am="አማርኛ" data-om="Oromoo">English</span>
-				  
-				</a>
-				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-				  <li>
-					<a class="dropdown-item d-flex align-items-center lang-option active" href="#!" data-lang="en">
-					  <span class="fi fi-gb me-2"></span>
-					  <span>English</span>
-					</a>
-				  </li>
-				  <li>
-					<a class="dropdown-item d-flex align-items-center lang-option" href="#!" data-lang="am">
-					  <span class="fi fi-et me-2"></span>
-					  <span>አማርኛ</span>
-					</a>
-				  </li>
-				  <li>
-					<a class="dropdown-item d-flex align-items-center lang-option" href="#!" data-lang="om">
-					  <img src="img/images/Flag_of_the_Oromia_Region.svg.png" 
-						   class="me-2" 
-						   style="width: 20px; height: 15px; object-fit: contain"
-						   alt="Oromia Region Flag">
-					  <span>Oromoo</span>
-					</a>
-				  </li>
-				</ul>
-			  </li>
-
+		
+				
             <!-- Mobile Menu Toggle -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
                 aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -260,118 +230,6 @@ Fixed Navigation
 <!-- Flag Icons CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/6.6.6/css/flag-icons.min.css">
 
-<style>
-.language-switcher .dropdown-toggle:hover {
-    background: rgba(0,0,0,0.05);
-}
-
-.language-switcher .dropdown-item {
-    border-radius: 6px;
-    margin: 2px 6px;
-}
-
-.language-switcher .dropdown-item:hover {
-    background: #f8f9fa;
-    transform: translateX(3px);
-}
-
-.language-switcher .dropdown-item.active {
-    background: #e9ecef;
-}
-
-.language-switcher .fi {
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    border-radius: 2px;
-}
-
-.language-switcher .fa-chevron-down {
-    font-size: 0.7rem;
-    opacity: 0.7;
-}
-
-/* ========================
-   Language Switcher Mobile
-   ======================== */
-@media (max-width: 390px) {
-  .language-switcher .dropdown-toggle {
-    padding: 0.5rem 1rem;
-  }
-  
-  .language-label {
-    font-size: 0.9rem;
-  }
-  
-  .language-switcher .dropdown-menu {
-    width: 100%;
-  }
-}
-
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const langStorageKey = 'gelan_lang';
-  const defaultLang = 'en';
-  
-  // Initialize
-  const currentLang = localStorage.getItem(langStorageKey) || defaultLang;
-  setLanguage(currentLang);
-  
-  // Language selection
-  document.querySelectorAll('.lang-option').forEach(option => {
-    option.addEventListener('click', function(e) {
-      e.preventDefault();
-      setLanguage(this.dataset.lang);
-    });
-  });
-  
-  function setLanguage(lang) {
-    // Update active state
-    document.querySelectorAll('.lang-option').forEach(opt => {
-      opt.classList.toggle('active', opt.dataset.lang === lang);
-    });
-    
-    // Update dropdown label
-    const label = document.querySelector('.language-label');
-    if (label) {
-      label.textContent = label.dataset[lang];
-    }
-    
-    // Update flag
-    const flag = document.querySelector('.language-switcher .language-flag');
-    if (flag) {
-      flag.className = `language-flag fi ${lang === 'en' ? 'fi-gb' : 'fi-et'} me-2`;
-    }
-    
-    // Update HTML attributes
-    document.documentElement.lang = lang;
-    
-    // Save preference
-    localStorage.setItem(langStorageKey, lang);
-    
-    // Update all translatable elements on page
-    updateTranslations(lang);
-  }
-  
-  function updateTranslations(lang) {
-    document.querySelectorAll('[data-en], [data-am], [data-om]').forEach(el => {
-      const translation = el.dataset[lang];
-      if (translation) {
-        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-          el.placeholder = translation;
-        } else if (el.hasAttribute('title') || el.hasAttribute('alt')) {
-          el.setAttribute('title', translation);
-          el.setAttribute('alt', translation);
-        } else {
-          el.textContent = translation;
-        }
-      }
-    });
-  }
-});
-
-
-</script>
 </header>
 	<!--
 End Fixed Navigation
@@ -381,6 +239,214 @@ End Fixed Navigation
 		<div class="slider-item th-fullpage hero-area"
 			style="background-image: url(img/images/home\ page\ the\ school.jpg);">
 			<div class="container">
+
+				<li>
+					<a class="dropdown-item d-flex align-items-center lang-option active" href="#!" data-lang="en">
+						<span class="fi fi-gb me-2"></span>
+						<span>English</span>
+					</a>
+				</li>
+				<li>
+					<a class="dropdown-item d-flex align-items-center lang-option" href="#!" data-lang="am">
+						<span class="fi fi-et me-2"></span>
+						<span>አማርኛ</span>
+					</a>
+				</li>
+				<li>
+					<a class="dropdown-item d-flex align-items-center lang-option" href="#!" data-lang="om">
+						<img src="img/images/Flag_of_the_Oromia_Region.svg.png" 
+							 class="me-2" 
+							 style="width: 20px; height: 15px; object-fit: contain"
+							 alt="Oromia Region Flag">
+						<span>Oromoo</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		
+		<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const langStorageKey = 'gelan_lang';
+			const supportedLangs = ['en', 'am', 'om'];
+			
+			// Auto-detect browser language
+			const browserLang = navigator.language.split('-')[0];
+			const defaultLang = supportedLangs.includes(browserLang) ? browserLang : 'en';
+			
+			// Initialize
+			const currentLang = localStorage.getItem(langStorageKey) || defaultLang;
+			setLanguage(currentLang);
+			
+			document.querySelectorAll('.lang-option').forEach(option => {
+				option.addEventListener('click', function(e) {
+					e.preventDefault();
+					setLanguage(this.dataset.lang);
+				});
+			});
+			
+			function setLanguage(lang) {
+				// Update UI
+				document.querySelectorAll('.lang-option').forEach(opt => {
+					opt.classList.toggle('active', opt.dataset.lang === lang);
+				});
+				
+				const label = document.querySelector('.language-label');
+				const flag = document.querySelector('.language-flag');
+				
+				// Update label
+				if(label) label.textContent = label.dataset[lang];
+				
+				// Update flag
+				if(flag) {
+					flag.className = `language-flag fi ${
+						lang === 'en' ? 'fi-gb' : 
+						lang === 'am' ? 'fi-et' : ''
+					} me-2`;
+				}
+				
+				// Save preference
+				localStorage.setItem(langStorageKey, lang);
+				
+				// Update page content
+				document.documentElement.lang = lang;
+				document.querySelectorAll('[data-en], [data-am], [data-om]').forEach(el => {
+					const translation = el.dataset[lang];
+					if(translation) {
+						if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+							el.placeholder = translation;
+						} else {
+							el.textContent = translation;
+						}
+					}
+				});
+			}
+		});
+		</script>
+		<style>
+			/* Language Switcher - Modern Design */
+.language-switcher {
+--primary-color: #2563eb;      /* Blue 600 */
+--hover-bg: rgba(37, 99, 235, 0.1);
+--transition-time: 0.25s;
+--shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+--shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+/* Dropdown Toggle */
+.language-switcher .dropdown-toggle {
+padding: 0.5rem 1rem;
+border-radius: 0.75rem;
+transition: all var(--transition-time) ease;
+border: 1px solid rgba(0,0,0,0.05);
+box-shadow: var(--shadow-sm);
+}
+
+.language-switcher .dropdown-toggle:hover {
+box-shadow: var(--shadow-md);
+transform: translateY(-1px);
+}
+
+/* Dropdown Menu */
+.language-switcher .dropdown-menu {
+border: 1px solid rgba(0,0,0,0.08);
+border-radius: 0.75rem;
+box-shadow: var(--shadow-md);
+backdrop-filter: blur(12px);
+background: rgba(255,255,255,0.95);
+margin-top: 0.5rem;
+min-width: 200px;
+overflow: hidden;
+}
+
+/* Dropdown Items */
+.language-switcher .dropdown-item {
+padding: 0.75rem 1rem;
+border-radius: 0.5rem;
+margin: 0.25rem;
+transition: all var(--transition-time) cubic-bezier(0.4,0,0.2,1);
+position: relative;
+display: flex;
+align-items: center;
+}
+
+.language-switcher .dropdown-item:hover {
+background: var(--hover-bg);
+transform: translateX(8px);
+}
+
+.language-switcher .dropdown-item.active {
+background: var(--hover-bg);
+font-weight: 500;
+}
+
+/* Flags */
+.language-switcher .fi {
+width: 20px;
+height: 15px;
+border-radius: 2px;
+box-shadow: var(--shadow-sm);
+border: 1px solid rgba(0,0,0,0.05);
+object-fit: cover;
+}
+
+/* Oromia Flag Image */
+.language-switcher .flag-image {
+width: 20px;
+height: 15px;
+border-radius: 2px;
+box-shadow: var(--shadow-sm);
+border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Checkmark Indicator */
+.language-switcher .active .fa-check {
+opacity: 1;
+color: var(--primary-color);
+margin-left: auto;
+}
+
+.language-switcher .fa-check {
+opacity: 0;
+transition: opacity var(--transition-time) ease;
+font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(-8px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.language-switcher .dropdown-menu {
+animation: fadeIn 0.3s ease forwards;
+}
+
+/* Mobile Optimization */
+@media (max-width: 640px) {
+.language-switcher .dropdown-menu {
+	width: 50%;
+	border-radius: 0.75rem 0 0.75rem 0.75rem;
+}
+
+.language-switcher .dropdown-item {
+	padding: 1rem;
+}
+
+.language-switcher .dropdown-toggle {
+	padding: 0.75rem;
+}
+}
+
+/* Hover Effects */
+.language-switcher .dropdown-item:hover .fa-check {
+opacity: 0.3;
+}
+
+.language-switcher .dropdown-item.active:hover .fa-check {
+opacity: 1;
+}
+		</style>
+
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<h1 class="display-4 mb-4 text-shadow" 
